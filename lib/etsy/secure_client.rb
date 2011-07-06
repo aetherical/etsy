@@ -22,7 +22,9 @@ module Etsy
     end
 
     def consumer # :nodoc:
-      path = Etsy.environment == :sandbox ? '/v2/sandbox/oauth/' : '/v2/oauth/'
+      site = (Etsy.environment == :sandbox) ? 'sandbox.openapi.etsy.com' : 'openapi.etsy.com'
+      path = '/v2/oauth/'
+#      path = Etsy.environment == :sandbox ? '/v2/sandbox/oauth/' : '/v2/oauth/'
       @consumer ||= OAuth::Consumer.new(Etsy.api_key, Etsy.api_secret, {
         :site               => 'http://openapi.etsy.com',
         :request_token_path => "#{path}request_token",

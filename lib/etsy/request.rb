@@ -7,7 +7,8 @@ module Etsy
   class Request
 
     def self.host # :nodoc:
-      'openapi.etsy.com'
+      (Etsy.environment == :sandbox) ?
+      'sandbox.openapi.etsy.com' : 'openapi.etsy.com'
     end
 
     # Perform a GET request for the resource with optional parameters - returns
@@ -41,7 +42,7 @@ module Etsy
 
     def base_path # :nodoc:
       parts = ['v2']
-      parts << 'sandbox' if Etsy.environment == :sandbox
+#      parts << 'sandbox' if Etsy.environment == :sandbox
       parts << (secure? ? 'private' : 'public')
 
       "/#{parts.join('/')}"
